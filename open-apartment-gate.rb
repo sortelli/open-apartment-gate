@@ -27,7 +27,23 @@ def open_gate_response_xml()
   resp.to_s()
 end
 
+def unauthorized_response_xml()
+  resp = Plivo::Response.new()
+
+  resp.addSpeak('Missing or incorrect authorization token', {
+    'language': 'en-US',
+    'voice':    'WOMAN'
+  })
+
+  resp.to_s()
+end
+
 get '/open-apartment-gate/' do
   content_type 'text/xml'
-  open_gate_response_xml()
+
+  if params['token'] == ENV['OPENGATE_AUTH_TOKEN']
+    open_gate_response_xml()
+  else
+    unauthorized_response_xml()
+  end
 end
