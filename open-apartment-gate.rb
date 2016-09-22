@@ -31,8 +31,3 @@ get '/open-apartment-gate/' do
   content_type 'text/xml'
   open_gate_response_xml()
 end
-
-post '/open-apartment-gate/' do
-  content_type 'text/xml'
-  open_gate_response_xml()
-end
